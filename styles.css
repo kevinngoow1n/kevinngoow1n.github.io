@@ -59,6 +59,14 @@ main {
     text-align: center;
     white-space: nowrap;
 }
+#indent {
+    text-indent:-75px;
+    margin-left:75px;
+}
+
+.center{
+    margin:0 auto
+}
 
 section {
     margin-bottom: 2rem;
