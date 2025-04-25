@@ -40,15 +40,16 @@ main {
 
 .line-split-left-center {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     width: 100%;
     margin-bottom: 0.5rem;
 }
   
 .line-split-left-center .left {
-    flex: 1;
     text-align: left;
+    flex: 1;
 }
   
 .line-split-left-center .center {
@@ -56,6 +57,7 @@ main {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    white-space: nowrap;
 }
 
 section {
