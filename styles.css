@@ -38,6 +38,15 @@ main {
     padding: 2rem;
 }
 
+.line-split {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc; /* optional */
+    padding-bottom: 4px;
+  }
+
 section {
     margin-bottom: 2rem;
 }
