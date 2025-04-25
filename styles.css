@@ -38,12 +38,25 @@ main {
     padding: 2rem;
 }
 
-.line-split {
+.line-split-left-center {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
     margin-bottom: 0.5rem;
-    border-bottom: none;
-  }
+}
+  
+.line-split-left-center .left {
+    flex: 1;
+    text-align: left;
+}
+  
+.line-split-left-center .center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
 
 section {
     margin-bottom: 2rem;
