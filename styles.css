@@ -83,11 +83,12 @@ footer {
 .fa {
     padding: 20px;
     font-size: 30px;
-    width: 50px;
+    width: 30px;
     text-align: center;
     text-decoration: none;
     background:#014421;
     color: white;
+    border-radius: 50%;
 }
   
   /* Add a hover effect if you want */
