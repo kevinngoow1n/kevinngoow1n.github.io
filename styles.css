@@ -95,7 +95,12 @@ footer {
 
 .fa-facebook {
     color: #014421;
-  }
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
 
 *{
     box-sizing: border-box;
