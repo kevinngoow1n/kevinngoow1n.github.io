@@ -94,12 +94,13 @@ footer {
 }
 
 .fa-facebook {
+    background: #f2f2f2;
     color: #014421;
 }
 
 .fa-linkedin {
-    background: #007bb5;
-    color: white;
+    background: #f2f2f2;
+    color: #014421;
 }
 
 *{
