@@ -79,6 +79,12 @@ footer {
     font-size: 0.9rem;
 }
 
+.icons-container {
+    max-width: 450px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 *{
     box-sizing: border-box;
 }
