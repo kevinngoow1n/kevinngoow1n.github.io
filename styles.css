@@ -86,6 +86,7 @@ footer {
     width: 50px;
     text-align: center;
     text-decoration: none;
+    border-radius: 50%;
 }
   
   /* Add a hover effect if you want */
@@ -99,6 +100,21 @@ footer {
 }
 
 .fa-linkedin {
+    background: #f2f2f2;
+    color: #014421;
+}
+
+.fa-instagram {
+    background: #f2f2f2;
+    color: #014421;
+}
+
+.fa-github {
+    background: #f2f2f2;
+    color: #014421;
+}
+
+.fa-envelope {
     background: #f2f2f2;
     color: #014421;
 }
