@@ -297,3 +297,14 @@ input[type=submit]:hover {
       margin: 0 0 5px 0;
     }
 }
+
+.resume-cv-container {
+    display: flex;
+    justify-content: space-between; /* adds space between them */
+    gap: 20px; /* optional: creates a gap */
+}
+
+.resume, .cv {
+    flex: 1; /* each takes up half the space */
+    min-width: 45%; /* adjust based on what looks good */
+}
