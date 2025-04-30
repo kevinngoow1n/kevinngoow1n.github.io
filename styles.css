@@ -309,18 +309,7 @@ input[type=submit]:hover {
     min-width: 45%; /* adjust based on what looks good */
 }
 
-.proj_container {
-    position: relative;
-    width: 50%;
-}
-  
-.proj_image {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-  
-.proj_overlay {
+.overlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -330,11 +319,11 @@ input[type=submit]:hover {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #01442180;
+    background-color: #014421;
 }
   
-.proj_container:hover .proj_overlay {
-    opacity: 1;
+.album:hover .overlay {
+    opacity: 0.7;
 }
   
 .proj_text {
@@ -348,3 +337,8 @@ input[type=submit]:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.proj_container {
+    position: relative;
+    width: 50%;
+  }
