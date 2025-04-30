@@ -330,7 +330,7 @@ input[type=submit]:hover {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #008CBA;
+    background-color: #01442180;
 }
   
 .proj_container:hover .proj_overlay {
