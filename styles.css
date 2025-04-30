@@ -308,3 +308,43 @@ input[type=submit]:hover {
     flex: 1; /* each takes up half the space */
     min-width: 45%; /* adjust based on what looks good */
 }
+
+.proj_container {
+    position: relative;
+    width: 50%;
+}
+  
+.proj_image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+  
+.proj_overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+}
+  
+.proj_container:hover .proj_overlay {
+    opacity: 1;
+}
+  
+.proj_text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
