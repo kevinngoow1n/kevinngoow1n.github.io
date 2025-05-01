@@ -341,3 +341,54 @@ input[type=submit]:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+/* finance */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 40px;
+  }
+  
+  .project-tile {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .portf_overlay-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .portf_overlay-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .portf_overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(1, 68, 33, 0.7); /* forest green */
+    opacity: 0;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+  
+  .portf_overlay-container:hover .portf_overlay {
+    opacity: 1;
+  }
+  
+  .portf_text {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+  }
