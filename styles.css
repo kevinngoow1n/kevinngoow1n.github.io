@@ -312,7 +312,7 @@ input[type=submit]:hover {
 .overlay_container {
     position: relative;
     width: 100%;
-    display: inline-block;
+    height: 100%
 }
 
 .overlay_container .overlay {
