@@ -326,6 +326,12 @@ input[type=submit]:hover {
     opacity: 0.7;
 }
   
+.proj_image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .proj_text {
     color: white;
     font-size: 20px;
@@ -340,4 +346,5 @@ input[type=submit]:hover {
 
 .proj_container {
     position: relative;
+    width: 50%;
   }
