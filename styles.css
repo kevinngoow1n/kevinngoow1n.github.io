@@ -325,12 +325,6 @@ input[type=submit]:hover {
 .album:hover .overlay {
     opacity: 0.7;
 }
-  
-.proj_image {
-    display: block;
-    width: 100%;
-    height: auto;
-}
 
 .proj_text {
     color: white;
@@ -346,5 +340,5 @@ input[type=submit]:hover {
 
 .proj_container {
     position: relative;
-    width: 50%;
+    width: 100%;
   }
