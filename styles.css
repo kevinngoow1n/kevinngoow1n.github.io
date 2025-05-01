@@ -316,31 +316,31 @@ input[type=submit]:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 10px;
-  }
+}
   
-  .project-tile {
+.project-tile {
     text-decoration: none;
     color: inherit;
     display: block;
-  }
+}
   
-  .portf_overlay-container {
+.portf_overlay-container {
     position: relative;
     width: 100%;
     height: 250px;
     overflow: hidden;
     border-radius: 8px;
-  }
+}
   
-  .portf_overlay-container img {
+.portf_overlay-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     border-radius: 8px;
-  }
+}
   
-  .portf_overlay {
+.portf_overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: #014421; /* forest green */
@@ -350,14 +350,32 @@ input[type=submit]:hover {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-  }
+}
   
-  .portf_overlay-container:hover .portf_overlay {
+.portf_overlay-container:hover .portf_overlay {
     opacity: 0.7;
-  }
+}
   
-  .portf_text {
+.portf_text {
     color: white;
     font-size: 1.2rem;
     text-align: center;
-  }
+}
+
+.button-class {
+    background-color: #014421;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button-class:hover {
+    opacity: 0.7;
+}
