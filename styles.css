@@ -324,7 +324,7 @@ input[type=submit]:hover {
     height: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: 014421; /* semi-transparent black */
+    background-color: #014421; /* semi-transparent black */
 }
 
 .overlay_container .image {
