@@ -1,0 +1,248 @@
+---
+title: "CA Notify Adoption Univariable & Multivariable Analysis"
+author: "Kevin Nguyen, Ravi Goyal, Mingjia Zhu, Gary Adamos, Rachel Kunowski"
+date: "5/13/2022"
+output: html_document
+---
+### Loading Libraries
+```{r, message=FALSE, warning=FALSE}
+library(googlesheets4)
+library(glmnet)
+library(ggiraph)
+library(ggiraphExtra)
+library(randomForest)
+library(ggplot2)
+library(dplyr)
+set.seed(1)
+```
+
+### Loading Data
+```{r, include = FALSE}
+gs4_deauth()
+ENXadoption = read_sheet(ss = "hidden")
+ENXadoption_matrix = as.matrix(ENXadoption[c(3:22,28)])
+ENXadoption_demographics_matrix = as.matrix(ENXadoption[c(3:16)])
+```
+
+## Univariable Analysis
+```{r}
+bachelors_morelm = lm(adoption~bachelors_more, data = ENXadoption)
+summary(bachelors_morelm)
+ggPredict(bachelors_morelm, se = TRUE)
+
+whitelm = lm(adoption~white, data = ENXadoption)
+summary(whitelm)
+ggPredict(whitelm, se = TRUE)
+
+blacklm = lm(adoption~black, data = ENXadoption)
+summary(blacklm)
+ggPredict(blacklm, se = TRUE)
+
+asianlm = lm(adoption~asian, data = ENXadoption)
+summary(asianlm)
+ggPredict(asianlm, se = TRUE)
+
+other_racelm = lm(adoption~other_race, data = ENXadoption)
+summary(other_racelm)
+ggPredict(other_racelm, se = TRUE)
+
+hispaniclm = lm(adoption~hispanic, data = ENXadoption)
+summary(hispaniclm)
+ggPredict(hispaniclm, se = TRUE)
+
+income100k_morelm = lm(adoption~income100k_more, data = ENXadoption)
+summary(income100k_morelm)
+ggPredict(income100k_morelm, se = TRUE)
+
+householdsize3_morelm = lm(adoption~householdsize3_more, data = ENXadoption)
+summary(householdsize3_morelm)
+ggPredict(householdsize3_morelm, se = TRUE)
+
+democratlm = lm(adoption~democrat, data = ENXadoption)
+summary(democratlm)
+ggPredict(democratlm, se = TRUE)
+
+republicanlm = lm(adoption~republican, data = ENXadoption)
+summary(republicanlm)
+ggPredict(republicanlm, se = TRUE)
+
+unaffiliated_partylm = lm(adoption~unaffiliated_party, data = ENXadoption)
+summary(unaffiliated_partylm)
+ggPredict(unaffiliated_partylm, se = TRUE)
+
+other_partylm = lm(adoption~other_party, data = ENXadoption)
+summary(other_partylm)
+ggPredict(other_partylm, se = TRUE)
+
+olderthan60lm = lm(adoption~olderthan60, data = ENXadoption)
+summary(olderthan60lm)
+ggPredict(olderthan60lm, se = TRUE)
+
+death_ratelm = lm(adoption~death_rate, data = ENXadoption)
+summary(death_ratelm)
+ggPredict(death_ratelm, se = TRUE)
+
+caseslm = lm(adoption~cases, data = ENXadoption)
+summary(caseslm)
+ggPredict(caseslm, se = TRUE)
+
+deathslm = lm(adoption~deaths, data = ENXadoption)
+summary(deathslm)
+ggPredict(deathslm, se = TRUE)
+
+hospitalizationslm = lm(adoption~hospitalizations, data = ENXadoption)
+summary(hospitalizationslm)
+ggPredict(hospitalizationslm, se = TRUE)
+
+maskfrequently_morelm = lm(adoption~maskfrequently_more, data = ENXadoption)
+summary(maskfrequently_morelm)
+ggPredict(maskfrequently_morelm, se = TRUE)
+
+at_least_partially_vaccinatedlm = lm(adoption~at_least_partially_vaccinated, data = ENXadoption)
+summary(at_least_partially_vaccinatedlm)
+ggPredict(at_least_partially_vaccinatedlm, se = TRUE)
+
+fully_vaccinatedlm = lm(adoption~fully_vaccinated, data = ENXadoption)
+summary(fully_vaccinatedlm)
+ggPredict(fully_vaccinatedlm, se = TRUE)
+
+residentiallm = lm(adoption~residential, data = ENXadoption)
+summary(residentiallm)
+ggPredict(residentiallm, se = TRUE)
+```
+
+# Demographics  
+## Multivariable Analysis 
+### Univariable Analysis p<0.1 [also less than 0.05]
+```{r}
+demographics_p_less_0.1 = lm(adoption~bachelors_more + white + black + asian + income100k_more + democrat + republican + unaffiliated_party + other_party + death_rate, 
+                 data = ENXadoption)
+summary(demographics_p_less_0.1)
+```
+
+### Selection
+```{r, include=FALSE}
+all_selection_demographics = lm(adoption~bachelors_more + white + black + asian + other_race + hispanic + income100k_more + householdsize3_more + democrat + republican + unaffiliated_party + other_party + olderthan60 + death_rate, 
+                 data = ENXadoption)
+
+intercept_selection_demographics = lm(adoption~1, data = ENXadoption)
+```
+#### Backward Selection
+```{r}
+backward_selection_demographics = step(all_selection_demographics, direction = "backward", scope = formula(intercept_selection_demographics), trace = 0)
+summary(backward_selection_demographics)
+```
+#### Forward Selection
+```{r}
+forward_selection_demographics = step(intercept_selection_demographics, direction = "forward", scope = formula(all_selection_demographics), trace = 0)
+summary(forward_selection_demographics)
+```
+#### Stepwise Selection
+```{r}
+stepwise_selection_demographics = step(intercept_selection_demographics, direction = "both", scope = formula(all_selection_demographics), trace = 0)
+summary(stepwise_selection_demographics)
+```
+
+## LASSO Analysis
+```{r}
+LASSO_demographics = glmnet(x = ENXadoption_demographics_matrix, y = ENXadoption$adoption)
+plot(LASSO_demographics, xvar = "lambda", label = TRUE)
+```
+
+## Random Forest Analysis
+```{r}
+RForest_demographics = randomForest(x = ENXadoption[3:16], y = ENXadoption$adoption, importance = TRUE)
+print(RForest_demographics)
+round(importance(RForest_demographics), 2)
+varImpPlot(RForest_demographics)
+```
+
+# Total  
+## Multivariable Analysis 
+### Univariable Analysis p<0.1 [also less than 0.05]
+```{r}
+p_less_0.1 = lm(adoption~bachelors_more + white + black + asian + income100k_more + democrat + republican + unaffiliated_party + other_party + death_rate + maskfrequently_more + at_least_partially_vaccinated + fully_vaccinated + residential, 
+                 data = ENXadoption)
+summary(p_less_0.1)
+```
+
+### Selection
+```{r, include=FALSE}
+all_selection = lm(adoption~bachelors_more + white + black + asian + other_race + hispanic + income100k_more + householdsize3_more + democrat + republican + unaffiliated_party + other_party + olderthan60 + death_rate + cases + deaths + hospitalizations + maskfrequently_more + at_least_partially_vaccinated + fully_vaccinated + residential, 
+                 data = ENXadoption)
+
+intercept_selection = lm(adoption~1, data = ENXadoption)
+```
+#### Backward Selection
+```{r}
+backward_selection = step(all_selection, direction = "backward", scope = formula(intercept_selection), trace = 0)
+summary(backward_selection)
+```
+#### Forward Selection
+```{r}
+forward_selection = step(intercept_selection, direction = "forward", scope = formula(all_selection), trace = 0)
+summary(forward_selection)
+```
+#### Stepwise Selection
+```{r}
+stepwise_selection = step(intercept_selection, direction = "both", scope = formula(all_selection), trace = 0)
+summary(stepwise_selection)
+```
+
+## LASSO Analysis
+
+```{r}
+LASSO_total = glmnet(x = ENXadoption_matrix, y = ENXadoption$adoption)
+plot(LASSO_total, xvar = "lambda", label = TRUE)
+```
+
+## Random Forest Analysis
+```{r}
+RForest_total = randomForest(x = ENXadoption[c(3:20,22,28)], y = ENXadoption$adoption, importance = TRUE)
+print(RForest_total)
+round(importance(RForest_total), 2)
+varImpPlot(RForest_total)
+
+RFtotal = as.data.frame(varImpPlot(RForest_total))
+RFtotal$varnames = rownames(RFtotal)
+rownames(RFtotal) = NULL
+RFtotal$variables = c("Bachelor’s Degree or Higher", "White", "Black", "Asian", "Other Race", "Hispanic", "$100,000 or More", "3 People or More", "Democratic", "Republican", "No Affiliation", "Other Party", "Over 60 Years Old", "Death Rates (Pre-COVID-19)", "Cases", "Deaths", "Hospitalizations", "Masking", "Fully Vaccinated", "Mobility")
+
+ggplot(RFtotal, aes(x=reorder(variables, IncNodePurity), weight=IncNodePurity, fill="red")) +
+  geom_bar() + ylab("Increase in Node Purity") + xlab("Variable Name") + theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=1)) +
+  geom_hline(yintercept = 0.019, color ="blue") + coord_flip()
+
+ggplot(RFtotal, aes(x=reorder(variables, `%IncMSE`), weight=`%IncMSE`, fill="red")) + 
+  geom_bar() + ylab("Percent Increase in Mean Squared Error") + xlab("Variable Name") + theme_minimal() + 
+  theme(legend.position = "none", axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=1)) + geom_hline(yintercept = 3.5, color ="blue") + coord_flip()
+```
+
+### Descriptive Statistics
+```{r}
+meansd = function(x) {
+  average = round(mean(x, na.rm = T), 2)
+  standard_dev = round(sd(x, na.rm = T), 2)
+  paste0(average, "(", standard_dev, ")")
+}
+meansd(ENXadoption$adoption)
+meansd(ENXadoption$bachelors_more)
+meansd(ENXadoption$white)
+meansd(ENXadoption$black)
+meansd(ENXadoption$asian)
+meansd(ENXadoption$hispanic)
+meansd(ENXadoption$income100k_more)
+meansd(ENXadoption$householdsize3_more)
+meansd(ENXadoption$democrat)
+meansd(ENXadoption$republican)
+meansd(ENXadoption$unaffiliated_party)
+meansd(ENXadoption$other_party)
+meansd(ENXadoption$olderthan60)
+meansd(ENXadoption$death_rate)
+meansd(ENXadoption$maskfrequently_more)
+meansd(ENXadoption$fully_vaccinated)
+meansd(ENXadoption$residential)
+meansd(ENXadoption$cases)
+meansd(ENXadoption$hospitalizations)
+meansd(ENXadoption$deaths)
+```
