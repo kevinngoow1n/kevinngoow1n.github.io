@@ -32,11 +32,13 @@
                 <img src="/assets/soybean_contact.JPG" style="width:100%">
               </div>
               <div class="column">
-                <form action="/action_page.php">
+                <form action="https://api.web3forms.com/submit" method="POST">
+                  <input type="hidden" name="access_key" value="f72c3afc-e1d9-42ed-a828-e669dcb3a5e8">
                   <input type="text" id="fname" name="firstname" placeholder="First Name">
                   <input type="text" id="lname" name="lastname" placeholder="Last Name">
                   <input type="text" id="email" name="emailaddress" placeholder="Email Address">
                   <textarea id="subject" name="subject" placeholder="Message" style="height:170px"></textarea>
+                  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
                   <input type="submit" value="Submit">
                 </form>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
